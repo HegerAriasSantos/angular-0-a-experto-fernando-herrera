@@ -72,3 +72,99 @@ ojo:
 - withLatestFrom es para combinar los datos de un observable con los datos de otro observable
 - zip es para combinar los datos de varios observables y emitirlos en un array
 - forkJoin es para combinar los datos de varios observables y emitirlos en un objeto
+
+
+pipes:
+
+- async es para subscribirse a un observable
+- date es para formatear una fecha
+- uppercase es para convertir un texto a mayúsculas
+- lowercase es para convertir un texto a minúsculas
+- currency es para formatear un número como moneda
+- decimal es para formatear un número como decimal
+- percent es para formatear un número como porcentaje
+- slice es para cortar un texto
+- json es para convertir un objeto a json
+- titlecase es para convertir un texto a title case
+- i18nPlural es para formatear un texto dependiendo de la cantidad de un elemento
+- i18nSelect es para formatear un texto dependiendo de un valor
+- number es para formatear un número
+- percent es para formatear un número como porcentaje
+- currency es para formatear un número como moneda
+
+
+pipes personalizados:
+
+- para crear un pipe personalizado se necesita crear una clase que implemente PipeTransform y dentro de la clase se debe implementar el método transform, el cual recive por parametros el valor a transformar y los parametros del pipe, por ejemplo:
+
+@Pipe({
+  name: 'customPipe'
+})
+export class CustomPipe implements PipeTransform {
+  transform(value: any, ...args: any[]): any {
+    return value + 'custom';
+  }
+}
+
+routes:
+
+- para crear una ruta se debe crear un objeto de tipo Routes y dentro de este objeto se deben crear objetos de tipo Route, cada objeto de tipo Route debe tener un path y un componente, por ejemplo:
+
+const routes: Routes = [
+  {
+    path: 'home',
+    component: HomeComponent
+  },
+  {
+    path: '**', // esto se usa para cuando no se encuentra la ruta
+    redirectTo: 'home'
+  }
+];
+
+
+routes hijas:
+
+- para crear rutas hijas se debe crear un objeto de tipo Routes y dentro de este objeto se deben crear objetos de tipo Route, cada objeto de tipo Route debe tener un path y un children, el children debe ser un objeto de tipo Routes, por ejemplo:
+
+const routes: Routes = [
+  {
+    path: 'home',
+    component: HomeComponent,
+    children: [
+      {
+        path: 'child',
+        component: ChildComponent
+      }
+    ]
+  },
+  {
+    path: '**', // esto se usa para cuando no se encuentra la ruta
+    redirectTo: 'home'
+  }
+];
+
+routa con lazy loading:
+
+- para crear una ruta con lazy loading se debe crear un objeto de tipo Routes y dentro de este objeto se deben crear objetos de tipo Route, cada objeto de tipo Route debe tener un path y un loadChildren, el loadChildren debe ser un string que contenga el path del modulo que se quiere cargar, por ejemplo:
+
+const routes: Routes = [
+  {
+    path: 'home',
+    component: HomeComponent,
+    children: [
+      {
+        path: 'child',
+        component: ChildComponent
+      }
+    ]
+  },
+  {
+    path: 'lazy',
+    loadChildren: () => import('./lazy/lazy.module').then(m => m.LazyModule) // esto sirve para cargar el modulo lazy, ojo se cargan los hijos de esa ruta base.
+  },
+  {
+    path: '**', // esto se usa para cuando no se encuentra la ruta
+    redirectTo: 'home'
+  }
+];
+
