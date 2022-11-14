@@ -1,0 +1,74 @@
+flag importantes:
+--skipsTests for skip tests
+
+notes:
+- ordenamiento de imports:
+  - importaciones de angular
+  - importaciones de terceros
+  - importaciones de la app
+
+
+Minimalist Angular Cli generate example
+
+ng g c hero-component --flat -it -is --skipTests
+
+-is         for inline css, preventing style file creation
+--flat      to prevent folder creation
+-it         for inline template, preventing html file creation
+--skipTests to prevent .spec file creation
+
+
+Cositas de angular:
+
+- viewChild es para obtener una referencia a un elemento del DOM
+- ng-content es para insertar contenido en un componente
+- ng-template es para crear un template que se puede usar en cualquier parte de la app
+- ng-container es para crear un elemento que no se renderiza en el DOM
+- ngIf es para renderizar un elemento si una condición es verdadera
+- ngFor es para iterar sobre un array y renderizar un elemento por cada elemento del array
+- ngSwitch es para renderizar un elemento dependiendo de una condición
+- ngClass es para agregar clases a un elemento dependiendo de una condición
+- ngStyle es para agregar estilos a un elemento dependiendo de una condición
+- ngModel es para hacer dos way data binding
+- ngModelGroup es para agrupar elementos de un formulario
+- ngForm es para crear un formulario
+- ngSubmit es para ejecutar una función cuando se envía un formulario
+- ngNonBindable es para evitar que angular compile un elemento
+- ngProjectAs es para renombrar un elemento
+- ngTemplateOutlet es para renderizar un template
+- ngValue es para asignar un valor a un elemento
+- ngModelOptions es para configurar el comportamiento de ngModel
+- ngPlural es para renderizar un elemento dependiendo de la cantidad de un elemento
+- ngPluralCase es para renderizar un elemento dependiendo de la cantidad de un elemento
+- ngTemplateOutletContext es para pasar un contexto a un template
+- ngTransclude es para insertar contenido en un componente
+- ngModelChange es para ejecutar una función cuando el valor de un elemento cambia
+
+angular router:
+
+- routerLink es para navegar a una ruta
+- routerLinkActive es para agregar una clase a un elemento cuando se navega a una ruta
+- routerLinkActiveOptions es para configurar el comportamiento de routerLinkActive
+
+Rxjs:
+- Subject es para crear un observable
+ojo: 
+ a los observable se les puede realizar un pipe y dentro del pipe se haran diversas operaciones para filtrar los datos dependiendo el requerimiento, se pueden usar los siguientes operadores:
+
+- map es para transformar los datos
+- filter es para filtrar los datos
+- tap es para ejecutar una función sin modificar los datos
+- take es para tomar los primeros n datos
+- takeUntil es para tomar los datos hasta que se emita un valor en otro observable
+- debounceTime es para esperar un tiempo antes de emitir los datos
+- distinctUntilChanged es para emitir los datos solo si son diferentes al anterior
+- switchMap es para cancelar las peticiones anteriores y solo emitir los datos de la última petición
+- mergeMap es para emitir los datos de todas las peticiones
+- catchError es para capturar los errores
+- retry es para reintentar una petición
+- shareReplay es para compartir los datos entre los subscriptores
+- startWith es para emitir un valor antes de los datos
+- combineLatest es para combinar los datos de varios observables
+- withLatestFrom es para combinar los datos de un observable con los datos de otro observable
+- zip es para combinar los datos de varios observables y emitirlos en un array
+- forkJoin es para combinar los datos de varios observables y emitirlos en un objeto
