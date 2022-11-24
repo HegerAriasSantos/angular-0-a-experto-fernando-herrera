@@ -168,3 +168,139 @@ const routes: Routes = [
   }
 ];
 
+
+Rutas Protegidas:
+
+- para crear rutas protegidas se debe crear un objeto de tipo Routes y dentro de este objeto se deben crear objetos de tipo Route, cada objeto de tipo Route debe tener un path y un canActivate, el canActivate debe ser un array de clases que implementen CanActivate, por ejemplo:
+
+
+
+
+Guards:
+
+- CanActivate es para proteger una ruta, si el guard retorna true se puede navegar a la ruta, si retorna false no se puede navegar a la ruta.
+
+- CanActivateChild es para proteger las rutas hijas, si el guard retorna true se puede navegar a la ruta, si retorna false no se puede navegar a la ruta.
+
+- CanDeactivate es para proteger una ruta cuando se quiere salir de ella, si el guard retorna true se puede salir de la ruta, si retorna false no se puede salir de la ruta.
+
+- Resolve es para resolver datos antes de cargar una ruta, si el guard retorna true se puede cargar la ruta, si retorna false no se puede cargar la ruta.
+
+- CanLoad es para proteger una ruta con lazy loading, si el guard retorna true se puede cargar la ruta, si retorna false no se puede cargar la ruta.
+
+- CanLoadChild es para proteger las rutas hijas con lazy loading, si el guard retorna true se puede cargar la ruta, si retorna false no se puede cargar la ruta.
+
+- CanReuse es para reutilizar una ruta, si el guard retorna true se puede reutilizar la ruta, si retorna false no se puede reutilizar la ruta.
+
+- CanDeactivateGuard es para proteger una ruta cuando se quiere salir de ella, si el guard retorna true se puede salir de la ruta, si retorna false no se puede salir de la ruta.
+
+- CanActivateGuard es para proteger una ruta, si el guard retorna true se puede navegar a la ruta, si retorna false no se puede navegar a la ruta.
+
+- CanActivateChildGuard es para proteger las rutas hijas, si el guard retorna true se puede navegar a la ruta, si retorna false no se puede navegar a la ruta.
+
+- CanLoadGuard es para proteger una ruta con lazy loading, si el guard retorna true se puede cargar la ruta, si retorna false no se puede cargar la ruta.
+
+- CanLoadChildGuard es para proteger las rutas hijas con lazy loading, si el guard retorna true se puede cargar la ruta, si retorna false no se puede cargar la ruta.
+
+- CanReuseGuard es para reutilizar una ruta, si el guard retorna true se puede reutilizar la ruta, si retorna false no se puede reutilizar la ruta.
+
+- ResolveGuard es para resolver datos antes de cargar una ruta, si el guard retorna true se puede cargar la ruta, si retorna false no se puede cargar la ruta.
+
+
+Implementacion del guard:
+
+- basicamente para implementar un guard debemos crear una clase que implemente CanActivate, CanActivateChild, CanDeactivate, Resolve, CanLoad, CanLoadChild, CanReuse, por ejemplo:
+
+import { Injectable } from '@angular/core';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { Observable } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class CanActivateGuard implements CanActivate {
+  canActivate(
+    next: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    return true;
+  }
+}
+
+
+Implementacion del guard en la ruta:
+
+- para implementar el guard en la ruta debemos crear un objeto de tipo Routes y dentro de este objeto se deben crear objetos de tipo Route, cada objeto de tipo Route debe tener un path y un canActivate, el canActivate debe ser un array de clases que implementen CanActivate, por ejemplo:
+
+const routes: Routes = [
+  {
+    path: 'home',
+    component: HomeComponent,
+    canLoad: [CanActivateGuard], // aqui se pueden pasar tantos guards como queramos para asignarles reglas para poder cargar la ruta
+    children: [
+      {
+        path: 'child',
+        component: ChildComponent
+      }
+    ]
+  },
+  {
+    path: 'lazy',
+    loadChildren: () => import('./lazy/lazy.module').then(m => m.LazyModule) // esto sirve para cargar el modulo lazy, ojo se cargan los hijos de esa ruta base.
+  },
+  {
+    path: '**', // esto se usa para cuando no se encuentra la ruta
+    redirectTo: 'home'
+  }
+];
+
+
+Directives:
+
+- las directivas son clases que se pueden usar en el html, por ejemplo:
+
+import { Directive, ElementRef } from '@angular/core';
+
+@Directive({
+  selector: '[error-msg]'
+})
+
+export class ErrorMsgDirective {
+  element: ElementRef;
+  @Input() color: string = 'red';
+  constructor(private el: ElementRef) {
+    element = el;
+  }
+  ngOnInit() {
+    this.setColor();
+  }
+  setColor() {
+    this.element.nativeElement.style.color = color;
+  }
+}
+
+
+Directivas estructurales:
+
+- las directivas estructurales son directivas que se pueden usar en el html para modificar el html, por ejemplo:
+
+import { Directive, Input, Templateref, ViewContainerRef } from '@angular/core';
+
+@Directive({
+  selector: '[customIf]'
+})
+
+export class CustomIfDirective {
+  @Input() set customIf(condition: boolean) {
+    if (condition) {
+      this.viewContainer.createEmbeddedView(this.templateRef);
+    } else {
+      this.viewContainer.clear();
+    }
+  }
+  constructor(private templateRef: TemplateRef<any>, private viewContainer: ViewContainerRef) {}
+}
+
+datos curiosos
+
+- con # se hace referencia a un elemento del html
+- con * se hace referencia a todo el componente html
