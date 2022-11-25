@@ -304,3 +304,29 @@ datos curiosos
 
 - con # se hace referencia a un elemento del html
 - con * se hace referencia a todo el componente html
+
+
+async validator:
+- un async validator es un validator que se ejecuta de forma asincrona, el cual es basicamente un servicio que implementa la interfaz AsyncValidator, por ejemplo: 
+
+import { Injectable } from '@angular/core';
+import { AsyncValidator, AbstractControl, ValidationErrors } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { UserService } from '../services/user.service';
+
+
+@injectable({
+  providedIn: 'root'
+})
+
+export class UserValidator implements AsyncValidator {
+  constructor(private userService: UserService) {}
+  validate(control: AbstractControl): Observable<ValidationErrors | null> {
+    return this.userService.getUser(control.value).pipe(
+      map(user => {
+        return user ? { userExists: true } : null;
+      })
+    );
+  }
+}
