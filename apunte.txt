@@ -50,29 +50,6 @@ angular router:
 - routerLinkActive es para agregar una clase a un elemento cuando se navega a una ruta
 - routerLinkActiveOptions es para configurar el comportamiento de routerLinkActive
 
-Rxjs:
-- Subject es para crear un observable
-ojo: 
- a los observable se les puede realizar un pipe y dentro del pipe se haran diversas operaciones para filtrar los datos dependiendo el requerimiento, se pueden usar los siguientes operadores:
-
-- map es para transformar los datos
-- filter es para filtrar los datos
-- tap es para ejecutar una función sin modificar los datos
-- take es para tomar los primeros n datos
-- takeUntil es para tomar los datos hasta que se emita un valor en otro observable
-- debounceTime es para esperar un tiempo antes de emitir los datos
-- distinctUntilChanged es para emitir los datos solo si son diferentes al anterior
-- switchMap es para cancelar las peticiones anteriores y solo emitir los datos de la última petición
-- mergeMap es para emitir los datos de todas las peticiones
-- catchError es para capturar los errores
-- retry es para reintentar una petición
-- shareReplay es para compartir los datos entre los subscriptores
-- startWith es para emitir un valor antes de los datos
-- combineLatest es para combinar los datos de varios observables
-- withLatestFrom es para combinar los datos de un observable con los datos de otro observable
-- zip es para combinar los datos de varios observables y emitirlos en un array
-- forkJoin es para combinar los datos de varios observables y emitirlos en un objeto
-
 
 pipes:
 
